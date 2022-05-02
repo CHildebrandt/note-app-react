@@ -1,0 +1,58 @@
+@mixin pseudo {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+@mixin element {
+    box-shadow: 
+        3px 3px 6px var(--n-dark)
+        -3px -3px 6px var(--n-light)
+    ;
+    &::before{
+        @include pseudo();
+        background: linear-gradient(170deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.1) 100%);
+    }
+}
+
+@mixin button {
+    box-shadow: 
+        3px 3px 6px var(--n-dark)
+        -3px -3px 6px var(--n-light)
+    ;
+    border: 1px solid var(--border-hint);
+    &::before {
+        @include pseudo();
+        background: linear-gradient(170deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.1) 100%);
+    }
+}
+
+@mixin recess {
+    box-shadow: 
+        -6px -6px 12px var(--n-light)
+        6px 6px 12px var(--n-dark)
+        inset -8px -8px 16px var(--n-light)
+        inset 8px 8px 16px var(--n-dark)
+    ;
+    &::before {
+        @include pseudo();
+        box-shadow: 
+            -8px -8px 16px var(--n-light)
+            8px 8px 16px var(--n-dark)
+        ;
+    }
+}
+
+@mixin field {
+    box-shadow: 
+        -4px -4px 8px var(--n-light)
+        4px 4px 8px var(--n-dark)
+        inset -3px -3px 6px var(--n-light)
+        inset 3px 3px 6px var(--n-dark)
+    ;
+}

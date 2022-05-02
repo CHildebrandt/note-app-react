@@ -1,0 +1,78 @@
+﻿:root {
+    --background: rgba(30,30,30,1);
+    --theme: rgb(30,30,30);
+    --text: rgb(230,230,230);
+    --border: rgba(255,255,255,0.2);
+    --border-hint: rgba(255,255,255,0.1);
+    --glow: rgba(255,255,255,0.33);
+    --highlight: rgba(255,255,255,0.66);
+    --bg-gradient: linear-gradient(170deg, rgba(40,40,40,1) 0%, rgba(10,10,10,1) 100%);
+    --n-light: rgba(60,60,60,0.3);
+    --n-dark: rgba(0,0,0,0.3);
+
+    --red: rgba(90,10,10,1);
+    --orange: rgba(90,50,10,1);
+    --yellow: rgba(90,90,10,1);
+    --green: rgba(10,90,10,1);
+}
+
+:root[data-theme='light'] {
+    --background: rgb(255,255,255);
+    --text: rgb(30,30,30);
+    --border: rgba(0,0,0,0.2);
+    --border-hint: rgba(0,0,0,0.1);
+    --glow: rgba(0,0,0,0.33);
+    --highlight: rgba(0,0,0,0.5);
+    --bg-gradient: linear-gradient(170deg, rgba(245,245,245,1) 0%, rgba(230,230,230,1) 100%);
+    --n-light: rgba(255,255,255,0.5);
+    --n-dark: rgba(0,0,0,0.15);
+
+    --red: rgba(255,155,155,1);
+    --orange: rgba(255,205,155,1);
+    --yellow: rgba(255,255,155,1);
+    --green: rgba(155,255,155,1);
+ }
+
+.App {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    background: var(--bg-gradient);
+    color: var(--text);
+    font-family: Arial;
+}
+
+input:focus {
+    box-shadow: 0 0 10px var(--glow);
+}
+
+#outside {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 99;
+    color: var(--text);
+    font-family: Arial;
+}
+
+// Conditional classes
+.hazy {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: filter 0.3s, opacity 0.3s;
+    filter: blur(2px);
+}
+
+.disabled {
+    transition: filter 0.3s;
+    filter: blur(2px);
+    & * {
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+.being-edited {
+    transition: all 0.2s;
+    opacity: 0;
+}

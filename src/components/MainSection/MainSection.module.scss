@@ -1,0 +1,58 @@
+@use '../../neumorphic.scss';
+
+.cont {
+    display: inline-block;
+    width: calc(100% - 80px);
+    height: calc(100% - 60px);
+    padding: 16px 12px 10px 8px;
+    & > div {
+        @include neumorphic.recess;
+        height: 100%;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        & > div {
+            height: 100%;
+            overflow-Y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--text) var(--background);
+        }
+    }
+    & ul {
+        display: grid;
+        justify-content: space-evenly;
+        position: relative;
+        padding-right: 20px;
+        grid-template-columns: repeat(auto-fill, 190px);
+        gap: 30px 18px;
+    }
+    & hr {
+        margin: 25px 25px 25px 15px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .cont ul {
+        grid-template-columns: repeat(auto-fill, 160px);
+        padding-top: 2em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .cont ul {
+        grid-template-columns: repeat(auto-fill, 120px);
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .cont ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .cont {
+        width: 100%;
+    }
+}

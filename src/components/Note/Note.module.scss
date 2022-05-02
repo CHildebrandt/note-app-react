@@ -1,0 +1,216 @@
+@use '../../neumorphic.scss';
+
+.note {
+    display: inline-block;
+    position: relative;
+    height: 240px;
+    user-select: none;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    &.selected {
+        & .bg, .select {
+            border: 1px solid var(--highlight);
+            box-shadow: 0 0 0.5em var(--highlight);
+        }
+    }
+    & .bg {
+        @include neumorphic.element;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        background-color: var(--background);
+        border: 1px solid var(--border-hint);
+        border-radius: inherit;
+        transition: all 0.3s;
+        &:hover:not(.selected:hover) {
+            box-shadow: 0 0 0.2em var(--glow);
+        }
+    }
+    & .center {
+        height: 100%;
+        overflow: hidden;
+        padding-top: 5px;
+    }
+    & p {
+        font-size: 14px;
+    }
+    & hr {
+        margin: 10px;
+    }
+    // change look when note is trashed
+    &.trash {
+        & .select, .pin, .buttons {
+            display: none;
+        }
+        & .bg:hover::after {
+            content: attr(data-untrash);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            top: 0; right: 0; bottom: 0; left: 0;
+            margin: auto;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+    }
+}
+
+.select, .pin {
+    @include neumorphic.button;
+    position: absolute;
+    background-color: var(--theme);
+    color: var(--text);
+    font-size: 16px;
+    border: 2px solid var(--border);
+    border-radius: 100px;
+    top: -18px;
+    z-index: 1;
+}
+
+.select {
+    width: 70px;
+    left: 50%;
+    height: 30px;
+    transform: translateX(-50%);
+}
+
+.pin {
+    right: -18px;
+    width: 36px;
+    height: 36px;
+}
+
+.colors {
+    flex-grow: 1;
+    display: inline-block;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border-radius: 100px;
+    position: relative;
+    & svg {
+        margin: auto;
+    }
+    & .remove {
+        transform: scale(1.5);
+        margin: auto;
+        color: var(--text);
+    }
+}
+
+.date, .palette {
+    @include neumorphic.element;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-top: 40px;
+    bottom: -45px;
+    height: 40px;
+    background-color: var(--background);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+    display: grid;
+    justify-content: space-evenly;
+    z-index: 2;
+    // expand vertical hover area
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    & button {
+        @include neumorphic.button;
+    }
+}
+
+.date {
+    grid-template-columns: repeat(3, 30%);
+    gap: 3.3%;
+    padding: 5px;
+    & button {
+        display: inline-block;
+        flex-grow: 1;
+        position: relative;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        background-color: var(--theme);
+        color: var(--text);
+        border-radius: 100px;
+    }
+}
+
+.palette {
+    grid-template-columns: repeat(4, 25%);
+}
+
+.buttons {
+    @include neumorphic.element;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    width: 184px;
+    bottom: 1%;
+    left: 1%;
+    width: 98%;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    & > div {
+        display: flex;
+        padding: 10px;
+        flex-grow: 1;
+        & svg {
+            margin: auto;
+        }
+        &:hover svg {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+    }
+}
+
+.ghost {
+    & * {
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .note {
+        height: 240px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .note {
+        height: 180px;
+    }
+    .select {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .buttons svg {
+        width: 0.3em;
+    }
+}
